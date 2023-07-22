@@ -14,4 +14,6 @@ $db_name = "mydb";
 $sql =  new mysqli($db_host, $db_user, $db_password, $db_name);
 if (!$sql){
     die('cant connect');
+}else{
+    echo 'connected';
 }
