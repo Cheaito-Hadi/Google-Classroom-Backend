@@ -60,7 +60,7 @@ if (isset($_POST['name'])) {
         'class_name' => $name,
         'google-link'=>$google_link,
         'section' => $section,
-        'description' => $subject,
+        'subject' => $subject,
         'room'=>$room,
         'image' => $image,
     );
