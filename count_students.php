@@ -11,11 +11,7 @@ $query->execute();
 $array = $query->get_result();
 
 $student_count = $array->fetch_assoc()['number_of_students'];
-// $response =[];
 
-// while($student = $array->fetch_assoc()){
-//     $response[] = $student;
-// }
 echo $student_count;
 
 
