@@ -4,7 +4,6 @@ include('../connection.php');
 
 $google_link = $_POST['google_link'];
 $classroom_name = $_POST['name'];
-
 $check_name = $mysqli->prepare('SELECT name FROM class_room WHERE name=?');
 $check_name->bind_param('s', $classroom_name);
 $check_name->execute();
@@ -23,3 +22,4 @@ if ($name_exists > 0) {
 $response['status'] = "success";
 echo json_encode($response);
 ?>
+
