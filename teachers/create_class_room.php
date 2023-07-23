@@ -1,5 +1,4 @@
 <?php
-
 include('../connection.php');
 
 // Allow the following HTTP headers for CORS requests, including the Content-Type header.
