@@ -32,8 +32,8 @@ if (isset($_POST['name'])) {
         $add_teacher->bind_param('ss', $user_id,$id_classroom);
         $add_teacher->execute();
 
-        $get_teachers=$mysqli->prepare('SELECT * from teachers Where teacher_id=? ');
-        $get_id->bind_param('s', $user_id);
+        $get_teachers=$mysqli->prepare('SELECT * from teachers Where teacher_id=?');
+        $get_teachers->bind_param('s', $user_id);
         $get_teachers->execute();
         $get_teachers->store_result();
         $get_teachers->bind_result($id,$teacher_id,$classRoom_id_teacher);
