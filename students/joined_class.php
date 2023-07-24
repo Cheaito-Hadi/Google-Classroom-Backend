@@ -21,15 +21,15 @@ if (isset($_POST['user_id'])) {
         $get_student->bind_param('s', $user_id);
         $get_student->execute();
         $get_student->store_result();
-        $get_student->bind_result($student_id, $user_id, $classRoom_id);
+        $get_student->bind_result($student_id, $classRoom_id, $user_id);
     
         $student_array = array();
         
         while ($get_student->fetch()) {
             $student_row = array(
                 'student_id' => $student_id,
-                'user_id' => $user_id,
-                'classRoom_id' => $classRoom_id,
+                'classRoom_id' =>  $classRoom_id,
+                'user_id' =>$user_id,
             );
             
             $student_array[] = $student_row;
