@@ -2,14 +2,14 @@
 
 include("connection.php");
 
-$email=$_POST["email"];
+$received_email=$_POST["email"];
 
 $query = $mysqli->prepare('select * from users where email=?');
-$query->bind_param('s', $email);
+$query->bind_param('s', $received_email);
 $query->execute();
 
 $query->store_result();
-$query->bind_result($id, $first_name, $last_name, $email);
+$query->bind_result($id, $first_name, $last_name, $email, $password, $role);
 $query->fetch();
 
 $num_rows = $query->num_rows();
