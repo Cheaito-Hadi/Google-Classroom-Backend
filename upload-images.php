@@ -6,8 +6,6 @@ if (isset($_FILES["profile_image"])) {
 
     $uploadDir = "uploads/";
 
-
-
     $fileName = $_FILES["profile_image"]["name"];
     $tmpName = $_FILES["profile_image"]["tmp_name"];
     $fileSize = $_FILES["profile_image"]["size"];
