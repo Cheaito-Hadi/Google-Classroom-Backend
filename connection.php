@@ -11,7 +11,7 @@ $db_password = "";
 $db_name = "mydb";
 
 //add sqli here
-$mysqli =  new mysqli($db_host, $db_user, $db_password, $db_name);
+$sql =  new mysqli($db_host, $db_user, $db_password, $db_name);
 if (!$mysqli){
     die('cant connect');
 }
