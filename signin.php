@@ -13,7 +13,6 @@ $query->bind_result($id, $first_name, $last_name, $email, $password, $role);
 $query->fetch();
 
 $num_rows = $query->num_rows();
-$response = array();
 if ($num_rows == 0) {
     $response['status'] = "user not found";
 } else {
