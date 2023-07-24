@@ -1,17 +1,22 @@
 <?php
 
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
-header('Access-Control-Allow-Headers: Content-Type');
-header('Access-Control-Max-Age: 3600');
+include("connection.php");
 
-$db_host = "localhost";
-$db_user = "root";
-$db_password = "";
-$db_name = "mydb";
+$received_email=$_POST["email"];
 
-//add sqli here
-$sql =  new mysqli($db_host, $db_user, $db_password, $db_name);
-if (!$sql){
-    die('cant connect');
+$query = $mysqli->prepare('select * from users where email=?');
+$query->bind_param('s', $received_email);
+$query->execute();
+
+$query->store_result();
+$query->bind_result($id, $first_name, $last_name, $email, $password, $role);
+$query->fetch();
+
+$num_rows = $query->num_rows();
+$response = array();
+if ($num_rows == 0) {
+    $response['status'] = "user not found";
+} else {
+    $response['status'] = "next step";
 }
+echo json_encode($response);
