@@ -1,8 +1,8 @@
 <?php
 
-include('../connection.php');
+include('connection.php');
 
-$get_classes = $mysqli->prepare('SELECT * FROM class_room');
+$get_classes = $mysqli->prepare('SELECT * FROM classes_room');
 $get_classes->execute();
 $get_classes->store_result();
 $rows_classes = $get_classes->num_rows();
