@@ -5,7 +5,7 @@ include('connection.php');
 $student_id = $_POST['student_id'];
 $assignment_id = $_POST['assignment_id'];
 
-$query = $sql->prepare('INSERT INTO turned_in ( `student_id`, `assignment_id`) VALUES (?,?)');
+$query = $mysqli->prepare('INSERT INTO turned_in ( `student_id`, `assignment_id`) VALUES (?,?)');
 $query->bind_param("ii",$student_id,$assignment_id);
 
 if ($query->execute()) {
