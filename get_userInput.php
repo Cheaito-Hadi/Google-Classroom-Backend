@@ -3,7 +3,7 @@ include('connection.php');
 
 $email = $_POST['email'];
 
-$query = $mysqli->prepare('SELECT id,first_name,last_name,email,role,profile_image FROM users WHERE email = ?');
+$query = $mysqli->prepare('SELECT id,first_name,last_name,email,profile_image FROM users WHERE email = ?');
 $query->bind_param('s', $email);
 $query->execute();
 
