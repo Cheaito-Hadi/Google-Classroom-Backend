@@ -1,6 +1,6 @@
 <?php 
 
-include('../connection.php');
+include('connection.php');
 
 $role=$_POST['role'];
 $query=$mysqli->prepare('SELECT email from users WHERE role=?');

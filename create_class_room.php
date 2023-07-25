@@ -6,8 +6,7 @@ if (isset($_POST['name'])) {
     $name = $_POST['name'];
     $section = $_POST['section'];
     $subject = $_POST['subject'];
-    $room = $_POST['room'];
-    $image=$_POST['image']; 
+    $room = $_POST['room']; 
 
     $check_name = $mysqli->prepare('SELECT name FROM classes_room WHERE name=?');
     $check_name->bind_param('s', $name);
@@ -16,8 +15,8 @@ if (isset($_POST['name'])) {
     $name_exists = $check_name->num_rows();
     
     if ($name_exists == 0) {
-        $query = $mysqli->prepare('INSERT into classes_room (name,section,subject,room,image) values(?,?,?,?,?)');
-        $query->bind_param('sssss', $name,$section,$subject,$room,$image);
+        $query = $mysqli->prepare('INSERT into classes_room (name,section,subject,room) values(?,?,?,?)');
+        $query->bind_param('ssss', $name,$section,$subject,$room);
         $query->execute();
         
         $get_id = $mysqli->prepare('SELECT id FROM classes_room Where name=?');
@@ -31,16 +30,16 @@ if (isset($_POST['name'])) {
         $add_teacher->bind_param('ss', $user_id,$id_classroom);
         $add_teacher->execute();
 
-        $get_teachers=$mysqli->prepare('SELECT * from teachers Where teacher_id=?');
+        $get_teachers=$mysqli->prepare('SELECT * from teachers Where user_id=?');
         $get_teachers->bind_param('s', $user_id);
         $get_teachers->execute();
         $get_teachers->store_result();
-        $get_teachers->bind_result($id,$teacher_id,$classRoom_id_teacher);
+        $get_teachers->bind_result($id,$user_id,$classRoom_id_teacher);
 
         while ($get_teachers->fetch()) {
         $teacher_data = array(
            'id' => $id,
-           'user_id' => $teacher_id,
+           'user_id' => $user_id,
            'classRoom_id'=>$classRoom_id_teacher,
            );
            $all_teacher_data[] = $teacher_data;
@@ -57,11 +56,10 @@ if (isset($_POST['name'])) {
       $class_data = array(
         'id' => $id_classroom,
         'name' => $name,
-        'google-link'=>$google_link,
+        'google_link'=>$google_link,
         'section' => $section,
         'subject' => $subject,
         'room'=>$room,
-        'image' => $image,
     );
     $classes_array[] = $class_data;
     }

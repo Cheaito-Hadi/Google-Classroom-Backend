@@ -5,23 +5,25 @@ include('connection.php');
 if(isset($_POST['class_room_id'])) {
     $id = $_POST['class_room_id'];
 
-    $query = $mysqli->prepare('SELECT title, due_date FROM assignments WHERE class_room_id = ?');
+    $query = $mysqli->prepare('SELECT id,title, due_date,topic FROM assignments WHERE class_room_id = ?');
     $query->bind_param('i', $id);
     $query->execute();
     $query->store_result();
-    $query->bind_result($title, $due_date);
+    $query->bind_result($id,$title, $due_date,$topic);
 
-    $class = array();
+    $assignemnts = array();
     while($query->fetch()) {
-        $assignment = array(
+        $assignment_data = array(
+            'id' => $title,
             'title' => $title,
-            'due_date' => $due_date
+            'due_date' => $due_date,
+            'topic' => $due_date,
         );
-        $class[] = $assignment;
+        $assignemnts[] = $assignment_data;
     }
 
     $response = array();
-    $response['class'] = $class;
+    $response['assignemnts'] = $assignemnts;
 
     echo json_encode($response);
 } else {
