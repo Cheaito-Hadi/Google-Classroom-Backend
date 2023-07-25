@@ -1,5 +1,5 @@
 <?php
-include('../connection.php');
+include('connection.php');
 
 if (isset($_POST['name'])) {
     $user_id=$_POST['user-id'];
@@ -7,27 +7,27 @@ if (isset($_POST['name'])) {
     $section = $_POST['section'];
     $subject = $_POST['subject'];
     $room = $_POST['room'];
-    $image=$_POST['image'];
+    $image=$_POST['image']; 
 
-    $check_name = $mysqli->prepare('SELECT name FROM class_room WHERE name=?');
+    $check_name = $mysqli->prepare('SELECT name FROM classes_room WHERE name=?');
     $check_name->bind_param('s', $name);
     $check_name->execute();
     $check_name->store_result();
     $name_exists = $check_name->num_rows();
     
     if ($name_exists == 0) {
-        $query = $mysqli->prepare('INSERT into class_room (name,section,subject,room,image) values(?,?,?,?,?)');
+        $query = $mysqli->prepare('INSERT into classes_room (name,section,subject,room,image) values(?,?,?,?,?)');
         $query->bind_param('sssss', $name,$section,$subject,$room,$image);
         $query->execute();
         
-        $get_id = $mysqli->prepare('SELECT id FROM class_room Where name=?');
+        $get_id = $mysqli->prepare('SELECT id FROM classes_room Where name=?');
         $get_id->bind_param('s', $name);
         $get_id->execute();
         $get_id->store_result();
         $get_id->bind_result($id_classroom);
         $get_id->fetch();
 
-        $add_teacher=$mysqli->prepare('INSERT into teachers (teacher_id , classRoom_id_teacher) values(?,?)');
+        $add_teacher=$mysqli->prepare('INSERT into teachers (user_id , classRoom_id) values(?,?)');
         $add_teacher->bind_param('ss', $user_id,$id_classroom);
         $add_teacher->execute();
 
@@ -40,13 +40,13 @@ if (isset($_POST['name'])) {
         while ($get_teachers->fetch()) {
         $teacher_data = array(
            'id' => $id,
-           'teahcer_id' => $teacher_id,
+           'user_id' => $teacher_id,
            'classRoom_id'=>$classRoom_id_teacher,
            );
            $all_teacher_data[] = $teacher_data;
         }
 
-       $get_classes = $mysqli->prepare('SELECT * FROM class_room');
+       $get_classes = $mysqli->prepare('SELECT * FROM classes_room');
        $get_classes->execute();
        $get_classes->store_result();
        $get_classes->bind_result($id_classroom, $name,$google_link, $section, $subject, $room, $image);
@@ -55,8 +55,8 @@ if (isset($_POST['name'])) {
 
       while ($get_classes->fetch()) {
       $class_data = array(
-        'id_classroom' => $id_classroom,
-        'class_name' => $name,
+        'id' => $id_classroom,
+        'name' => $name,
         'google-link'=>$google_link,
         'section' => $section,
         'subject' => $subject,
