@@ -4,7 +4,7 @@ include('connection.php');
 $email = $_POST['email'];
 $password = $_POST['password'];
 
-$query = $mysqli->prepare('SELECT * FROM users WHERE email = ?');
+$query = $mysqli->prepare('SELECT id,first_name,last_name,email,password,role,profile_image FROM users WHERE email = ?');
 $query->bind_param('s', $email);
 $query->execute();
 

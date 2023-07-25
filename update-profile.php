@@ -19,7 +19,7 @@ if(isset($_POST['email'])){
 if(isset( $_POST['password'])){
     $update_password = $_POST['password'];
 }else{
-    $upload_password='';
+    $update_password='';
 }
 
 
@@ -37,7 +37,7 @@ if ($update_lastname !== "") {
 if ($update_email !== "") {
     $update_fields[] = "email = '$update_email'";
 }
-if ($upload_password !== "") {
+if ($update_password !== "") {
     $hashed_password = password_hash($update_password, PASSWORD_BCRYPT);
     $update_fields[] = "hashed_password = '$hashed_password'";
 }
