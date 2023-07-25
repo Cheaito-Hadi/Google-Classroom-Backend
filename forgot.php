@@ -2,9 +2,10 @@
 include('connection.php');
 
 $recovery_email = $_POST["email"];
+$recovery_answer = $_POST["answer"];
 
-$query = $mysqli->prepare("SELECT password from users where email = ?");
-$query->bind_param("s",$recovery_email);
+$query = $mysqli->prepare("SELECT password FROM users WHERE email = ? AND questions = ?");
+$query->bind_param("ss",$recovery_email,$recovery_answer);
 $query->execute();
 
 $query->store_result();
