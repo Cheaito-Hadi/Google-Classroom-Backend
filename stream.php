@@ -1,9 +1,7 @@
 <?php
 include('connection.php');
 
-
-//assignment taba3 classroom m3ayyane
-$query = $mysqli->prepare("SELECT * FROM assignmnt");
+$query = $mysqli->prepare("SELECT title FROM assignmnt");
 $query->execute();
 $query->store_result();
 $query->bind_result($title);
