@@ -11,7 +11,7 @@ if(isset($_POST['class_room_id'])) {
     $query->store_result();
     $query->bind_result($id,$title, $due_date,$topic);
 
-    $assignemnts = array();
+    $assignments = array();
     while($query->fetch()) {
         $assignment_data = array(
             'id' => $id,
@@ -19,11 +19,11 @@ if(isset($_POST['class_room_id'])) {
             'due_date' => $due_date,
             'topic' => $topic,
         );
-        $assignemnts[] = $assignment_data;
+        $assignments[] = $assignment_data;
     }
 
     $response = array();
-    $response['assignemnts'] = $assignemnts;
+    $response['assignments'] = $assignments;
 
     echo json_encode($response);
 } else {
