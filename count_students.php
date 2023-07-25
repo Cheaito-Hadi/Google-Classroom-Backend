@@ -4,7 +4,7 @@ include('connection.php');
 
 $class_room_id =1;
 
-$query = $mysqli->prepare('select count(*) as number_of_students from students s where s.id_classRoom = ?');
+$query = $mysqli->prepare('select count(*) as number_of_students from students s where s.classRoom_id = ?');
 $query->bind_param("i",$class_room_id);
 
 $query->execute();

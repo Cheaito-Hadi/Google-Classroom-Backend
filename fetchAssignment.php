@@ -14,10 +14,10 @@ if(isset($_POST['class_room_id'])) {
     $assignemnts = array();
     while($query->fetch()) {
         $assignment_data = array(
-            'id' => $title,
+            'id' => $id,
             'title' => $title,
             'due_date' => $due_date,
-            'topic' => $due_date,
+            'topic' => $topic,
         );
         $assignemnts[] = $assignment_data;
     }
