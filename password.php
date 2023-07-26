@@ -4,7 +4,7 @@ include('connection.php');
 $email = $_POST['email'];
 $password = $_POST['password'];
 
-$query = $mysqli->prepare('SELECT id,first_name,last_name,email,password,role,profile_image FROM users WHERE email = ?');
+$query = $mysqli->prepare('SELECT id,first_name,last_name,email,password,profile_image FROM users WHERE email = ?');
 $query->bind_param('s', $email);
 $query->execute();
 
@@ -16,7 +16,7 @@ if ($result->num_rows === 1) {
     $user = $result->fetch_assoc();
     if (password_verify($password, $user['password'])) {
 
-        $response['status'] = 'logged in';
+        $response['status'] = 'logged-in';
         $response['user'] = $user;
     } else {
         $response['status'] = "wrong password";

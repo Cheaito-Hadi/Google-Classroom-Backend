@@ -1,15 +1,27 @@
 <?php
 include('connection.php');
 
-$query = $mysqli->prepare("SELECT title FROM assignmnt");
+$class_room_id = $_POST["classroom_id"];
+
+$query = $mysqli->prepare("SELECT id,title,teachers_id,class_room_id FROM assignments where class_room_id=?");
+$query->bind_param('s',$class_room_id);
 $query->execute();
 $query->store_result();
-$query->bind_result($title);
+$query->bind_result($id,$title,$teachers_id,$class_room_id);
 
-$titles = array();
+$assignment = array();
 while ($query->fetch()) {
-    $titles[] = $title;
+    $assignment_data= array(
+        'id' => $id,
+        'title' => $title,
+        'teachers_id' => $teachers_id,
+        'class_room_id' => $class_room_id,
+    );
+
+$assignment[] = $assignment_data;
 }
-$response["titles"] = $titles;
+$response['status'] = "Display assignments";
+$response['assignment']=$assignment;
+
 echo json_encode($response);
 ?>

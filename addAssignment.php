@@ -8,10 +8,14 @@ $date = date('Y-m-d\TH:i:s', strtotime($_POST['due_date']));
 $topic = $_POST['topic'];
 $teacher = $_POST['teachers_id'];
 $classroom = $_POST['class_room_id'];
-$post_date = $_POST['post_date'];
 
-$query = $mysqli->prepare('insert into assignments (title, instructions,due_date,topic,teachers_id,class_room_id,post_date) values (?,?,?,?,?,?,?)');
+$query = $mysqli->prepare('insert into assignments (title, instructions,due_date,topic,teachers_id,class_room_id) values (?,?,?,?,?,?)');
 
-$query->bind_param('sssssss', $title,$instruction,$date,$topic,$teacher,$classroom,$post_date);
+$query->bind_param('ssssss', $title,$instruction,$date,$topic,$teacher,$classroom);
 $query->execute();
 
+$response['status'] = 'assignment created';
+
+
+$json_response = json_encode($response);
+echo $json_response;
