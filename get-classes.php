@@ -18,7 +18,7 @@ if ($rows_classes !== 0) {
         $class_data = array(
             'id_classroom' => $id_classroom,
             'class_name' => $name,
-            'google-link' => $google_link,
+            'google_link' => $google_link,
             'section' => $section,
             'subject' => $subject,
             'room' => $room,
